@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const trakt = axios.create({
-  baseURL: "https://api.trakt.tv",
+  baseURL: process.env.TRAKT_API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
     "trakt-api-version": "2",
