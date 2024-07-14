@@ -6,6 +6,7 @@ const apicache = require("apicache");
 
 //routes
 const search = require("../routes/search");
+const show = require("../routes/show");
 
 module.exports = (app) => {
   //Init cache
@@ -13,7 +14,7 @@ module.exports = (app) => {
 
   //Rate limiter
   const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
+    windowMs: 10 * 60 * 1000, // 15 minutes
     max: 100, // limit each IP to 100 requests per windowMs
   });
   app.use(limiter);
@@ -27,6 +28,7 @@ module.exports = (app) => {
 
   //mount routes
   app.use("/api/v1/search", cache("2 minutes"), search);
+  app.use("/api/v1/show", cache("2 minutes"), show);
 
   //error handler middleware
   app.use(errorHandle);
